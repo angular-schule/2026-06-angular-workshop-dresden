@@ -6,10 +6,25 @@ import { Book } from './book';
 export class BookRatingHelper {
     
     rateUp(book: Book): Book {
-        return book; // TODO
+        if (book.rating >= 5) {
+            return book;
+        }
+
+        return {
+            ...book,
+            // rating: Math.min(book.rating + 1, 5)
+            rating: book.rating + 1
+        };
     }
     
     rateDown(book: Book): Book {
-        return book; // TODO
+        if (book.rating <= 1) {
+            return book;
+        }
+
+        return {
+            ...book,
+            rating: book.rating - 1
+        };
     }
 }
