@@ -2,6 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookCard } from '../book-card/book-card';
 import { BookRatingHelper } from '../shared/book-rating-helper';
+import { BookStore } from '../shared/book-store';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -12,33 +14,20 @@ import { BookRatingHelper } from '../shared/book-rating-helper';
 export class DashboardPage {
 
   #ratingHelper = inject(BookRatingHelper);
+  #store = inject(BookStore);
 
   protected readonly books = signal<Book[]>([]);
 
   constructor() {
-    this.books.set([
-      {
-        isbn: '123',
-        title: 'Angular',
-        description: 'Das große Praxisbuch',
-        price: 39.90,
-        rating: 5,
-        authors: ['FM', 'DK', 'JH']
-      },
-      {
-        isbn: '456',
-        title: 'Vue.js',
-        description: 'Das grüne Framework',
-        price: 32.90,
-        rating: 3,
-        authors: ['FD']
-      },
-    ]);
+    this.#store.getAll().subscribe(receivedBooks => {
+      this.books.set(receivedBooks);
+    });
   }
 
   doRateUp(book: Book) {
     const ratedBook = this.#ratingHelper.rateUp(book);
     this.#updateList(ratedBook);
+    
   }
   
   doRateDown(book: Book) {
