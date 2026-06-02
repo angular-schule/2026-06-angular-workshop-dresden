@@ -1,2 +1,15 @@
-<h2>{{ book().title }}</h2>
-<p>{{ book().description }}</p>
+@let b = book();
+<article class="card mb-4">
+  <div class="card-body bg-light">
+    <img class="img-thumbnail float-end" alt=""
+      src="https://api.angular.schule/avatar/{{ b.rating }}">
+    <header class="card-title">
+      <h2>{{ b.title }}</h2>
+      <span class="badge rounded-pill text-bg-secondary">
+        Bewertung: {{ b.rating }}
+      </span>
+    </header>
+    <p>{{ b.description }}</p>
+    <p><strong>Preis:</strong> {{ b.price }}</p>
+  </div>
+</article>
