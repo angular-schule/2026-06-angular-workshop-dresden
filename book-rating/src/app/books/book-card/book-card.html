@@ -18,6 +18,16 @@
     <button type="button" class="btn btn-green"
         aria-label="Rating erhöhen" (click)="doRateUp()" [disabled]="rateUpDisabled()">+</button>
 
-    <button type="button" class="btn btn-warning" (click)="doDeleteBook()">Löschen</button>
+    <button type="button" class="btn btn-yellow" (click)="doDeleteBook()">Löschen</button>
+
+    <a [routerLink]="['/books', b.isbn]">Details</a>
+    
+    <!--<a routerLink="/books">Dashboard</a>
+    <a routerLink="/books/{{ b.isbn }}">Details</a>
+    <a [routerLink]="'/books/' + b.isbn">Details</a>
+    <a [routerLink]="['.', b.isbn]">Details</a>
+    <a [routerLink]="[b.isbn]">Details</a>
+    <a [routerLink]="b.isbn">Details</a>
+    <a routerLink="{{ b.isbn }}">Details</a>-->
   </div>
 </article>
