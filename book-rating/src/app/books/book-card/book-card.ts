@@ -18,7 +18,7 @@ export class BookCard {
   // von unten nach oben
   readonly rateUp = output<Book>();
   readonly rateDown = output<Book>();
-
+  readonly delete = output<Book>();
 
   readonly rateDownDisabled = computed(() => this.book().rating <= this.min());
   readonly rateUpDisabled = computed(() => this.book().rating >= this.max());
@@ -29,5 +29,11 @@ export class BookCard {
 
   doRateDown() {
     this.rateDown.emit(this.book());
+  }
+
+  doDeleteBook() {
+    if (confirm('Buch löschen??')) {
+      this.delete.emit(this.book());
+    }
   }
 }

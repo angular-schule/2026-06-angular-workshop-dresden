@@ -34,6 +34,16 @@ export class DashboardPage {
     const ratedBook = this.#ratingHelper.rateDown(book);
     this.#updateList(ratedBook);
   }
+  
+  doDeleteBook(book: Book) {
+    this.#store.delete(book.isbn).subscribe(() => {
+      // Liste neuladen
+      this.#store.getAll().subscribe(receivedBooks => {
+        this.books.set(receivedBooks);
+      });
+    });
+    
+  }
 
   #updateList(ratedBook: Book) {
     // [1,2,3,4].map(e => e * 10) // [10, 20, 30, 40]
