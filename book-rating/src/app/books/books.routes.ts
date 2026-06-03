@@ -7,7 +7,7 @@ import { BooksEntryPage } from "./books-entry-page/books-entry-page";
 
 export const booksRoutes: Routes = [
     {
-        path: 'books',
+        path: '',
         component: BooksEntryPage,
         children: [
             // diese Routen werden in das RouterOutlet der BooksEntryPage gesetzt
