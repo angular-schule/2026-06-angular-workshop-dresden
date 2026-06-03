@@ -3,10 +3,18 @@ import { DashboardPage } from "./dashboard-page/dashboard-page";
 import { BookDetailsPage } from "./book-details-page/book-details-page";
 import { BookCreatePage } from "./book-create-page/book-create-page";
 import { BookSearchPage } from "./book-search-page/book-search-page";
+import { BooksEntryPage } from "./books-entry-page/books-entry-page";
 
 export const booksRoutes: Routes = [
-    { path: 'books', component: DashboardPage },
-    { path: 'books/create', component: BookCreatePage },
-    { path: 'books/search', component: BookSearchPage },
-    { path: 'books/:isbn', component: BookDetailsPage },
+    {
+        path: 'books',
+        component: BooksEntryPage,
+        children: [
+            // diese Routen werden in das RouterOutlet der BooksEntryPage gesetzt
+            { path: '', component: DashboardPage },
+            { path: 'create', component: BookCreatePage },
+            { path: 'search', component: BookSearchPage },
+            { path: ':isbn', component: BookDetailsPage },
+        ]
+    }
 ];
