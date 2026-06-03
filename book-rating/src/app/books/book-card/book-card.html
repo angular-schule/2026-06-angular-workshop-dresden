@@ -13,9 +13,9 @@
     <p><strong>Preis:</strong> {{ b.price }}</p>
 
     <button type="button" class="btn btn-red"
-        aria-label="Rating verringern" (click)="doRateDown()">–</button>
+        aria-label="Rating verringern" (click)="doRateDown()" [disabled]="rateDownDisabled()">–</button>
 
     <button type="button" class="btn btn-green"
-        aria-label="Rating erhöhen" (click)="doRateUp()">+</button>
+        aria-label="Rating erhöhen" (click)="doRateUp()" [disabled]="rateUpDisabled()">+</button>
   </div>
 </article>

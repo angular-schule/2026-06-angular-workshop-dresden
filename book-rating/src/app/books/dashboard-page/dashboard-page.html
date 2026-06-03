@@ -1,5 +1,5 @@
 @for (b of books(); track b.isbn) {
-    <app-book-card [book]="b"
+    <app-book-card [book]="b" [min]="1" [max]="5"
         (rateUp)="doRateUp($event)"
         (rateDown)="doRateDown($event)" />
 }
