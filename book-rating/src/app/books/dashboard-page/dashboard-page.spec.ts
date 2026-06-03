@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardPage } from './dashboard-page';
+import { BookStore } from '../shared/book-store';
+import { of } from 'rxjs';
 
 describe('DashboardPage', () => {
   let component: DashboardPage;
@@ -9,6 +11,15 @@ describe('DashboardPage', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DashboardPage],
+      providers: [
+        // BookStore ausmocken: Wenn BS angefordert wird, wird stattdessen unser Testdouble ausgeliefert
+        {
+          provide: BookStore,
+          useValue: {
+            getAll: () => of([])
+          }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardPage);
