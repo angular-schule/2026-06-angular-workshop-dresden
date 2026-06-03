@@ -10,7 +10,7 @@
       </span>
     </header>
     <p>{{ b.description }}</p>
-    <p><strong>Preis:</strong> {{ b.price }}</p>
+    <p><strong>Preis:</strong> {{ b.price | currency:'EUR' }}</p>
 
     <button type="button" class="btn btn-red"
         aria-label="Rating verringern" (click)="doRateDown()" [disabled]="rateDownDisabled()">–</button>
