@@ -1,6 +1,12 @@
-@for (b of books(); track b.isbn) {
-    <app-book-card [book]="b" [min]="1" [max]="5"
-        (rateUp)="doRateUp($event)"
-        (rateDown)="doRateDown($event)"
-        (delete)="doDeleteBook($event)" />
+@if (books.isLoading()) {
+    <div>Wird geladen …</div>
+}
+
+@if (books.hasValue()) {
+    @for (b of books.value(); track b.isbn) {
+        <app-book-card [book]="b" [min]="1" [max]="5"
+            (rateUp)="doRateUp($event)"
+            (rateDown)="doRateDown($event)"
+            (delete)="doDeleteBook($event)" />
+    }
 }

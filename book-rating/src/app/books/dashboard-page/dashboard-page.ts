@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookCard } from '../book-card/book-card';
 import { BookRatingHelper } from '../shared/book-rating-helper';
@@ -16,12 +16,12 @@ export class DashboardPage {
   #ratingHelper = inject(BookRatingHelper);
   #store = inject(BookStore);
 
-  protected readonly books = signal<Book[]>([]);
+  protected readonly books = this.#store.getAllResource();
 
   constructor() {
-    this.#store.getAll().subscribe(receivedBooks => {
+    /*this.#store.getAll().subscribe(receivedBooks => {
       this.books.set(receivedBooks);
-    });
+    });*/
   }
 
   doRateUp(book: Book) {
@@ -38,9 +38,7 @@ export class DashboardPage {
   doDeleteBook(book: Book) {
     this.#store.delete(book.isbn).subscribe(() => {
       // Liste neuladen
-      this.#store.getAll().subscribe(receivedBooks => {
-        this.books.set(receivedBooks);
-      });
+      this.books.reload();
     });
     
   }
@@ -49,7 +47,7 @@ export class DashboardPage {
     // [1,2,3,4].map(e => e * 10) // [10, 20, 30, 40]
     // [1,2,3,4,5,6,7,8].filter(e => e < 5) // [1,2,3,4]
     
-    this.books.update(currentList => {
+    this.books.value.update(currentList => {
       return currentList.map(b => {
         if (b.isbn === ratedBook.isbn) {
           return ratedBook;
