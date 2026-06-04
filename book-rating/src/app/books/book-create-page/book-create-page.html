@@ -1,1 +1,53 @@
-<p>book-create-page works!</p>
+<form [formRoot]="bookForm">
+    <div class="form-group">
+        @let isbnInvalid = bookForm.isbn().invalid();
+        @let isbnInvalidAndTouched = bookForm.isbn().touched() && bookForm.isbn().invalid();
+
+        <label for="isbnInput">ISBN</label>
+        <input type="text" id="isbnInput" class="form-control"
+            [formField]="bookForm.isbn"
+            [aria-invalid]="bookForm.isbn().touched() ? isbnInvalid : null"
+            [aria-errormessage]="isbnInvalidAndTouched ? 'isbnErrors' : null">
+
+        @if (bookForm.isbn().touched() && bookForm.isbn().invalid()) {
+            <ul id="isbnErrors">
+                @for (e of bookForm.isbn().errors(); track e.kind) {
+                    <li>{{ e.message }}</li>
+                }
+            </ul>
+        }
+    </div>
+    
+    <div class="form-group">
+        <label for="titleInput">Title</label>
+        <input type="text" id="titleInput" class="form-control" [formField]="bookForm.title">
+    </div>
+    
+    <div class="form-group">
+        <label for="descInput">Description</label>
+        <textarea id="descInput" class="form-control" [formField]="bookForm.description"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ratingInput">Rating</label>
+        <input type="number" id="ratingInput" class="form-control" [formField]="bookForm.rating">
+    </div>
+
+    <div class="form-group">
+        <label for="priceInput">Price</label>
+        <input type="number" id="priceInput" class="form-control" [formField]="bookForm.price">
+    </div>
+
+    <fieldset class="form-group">
+        <legend>Authors</legend>
+        <button type="button" class="btn btn-outline-primary" (click)="addAuthorField()">+ Author</button>
+        @for (a of bookForm.authors; track a) {
+            <input type="text" class="form-control" [formField]="a" />
+            <button type="button" class="btn btn-outline-primary btn-sm" (click)="removeAuthorField($index)">–</button>
+        }
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<pre>{{ bookFormData() | json }}</pre>
