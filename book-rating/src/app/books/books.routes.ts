@@ -4,6 +4,7 @@ import { BookDetailsPage } from "./book-details-page/book-details-page";
 import { BookCreatePage } from "./book-create-page/book-create-page";
 import { BookSearchPage } from "./book-search-page/book-search-page";
 import { BooksEntryPage } from "./books-entry-page/books-entry-page";
+import { authGuard } from "../auth-guard";
 
 export const booksRoutes: Routes = [
     {
@@ -12,7 +13,7 @@ export const booksRoutes: Routes = [
         children: [
             // diese Routen werden in das RouterOutlet der BooksEntryPage gesetzt
             { path: '', component: DashboardPage },
-            { path: 'create', component: BookCreatePage },
+            { path: 'create', component: BookCreatePage, canActivate: [authGuard] },
             { path: 'search', component: BookSearchPage },
             { path: ':isbn', component: BookDetailsPage },
         ]

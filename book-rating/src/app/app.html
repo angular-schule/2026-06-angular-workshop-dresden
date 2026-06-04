@@ -7,5 +7,11 @@
     <a class="me-2" routerLink="/books" routerLinkActive="active" ariaCurrentWhenActive="page">Books</a>
   </nav>
 
+  <div>
+    <button type="button" class="btn btn-green" (click)="authService.login()">Login</button>
+    <button type="button" class="btn btn-red" (click)="authService.logout()">Logout</button>
+    isAuthenticated: {{ authService.isAuthenticated() }}
+  </div>
+
   <router-outlet />
 </main>
