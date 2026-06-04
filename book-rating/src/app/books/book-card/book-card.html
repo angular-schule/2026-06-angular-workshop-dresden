@@ -19,6 +19,7 @@
         aria-label="Rating erhöhen" (click)="doRateUp()" [disabled]="rateUpDisabled()">+</button>
 
     <button type="button" class="btn btn-yellow" (click)="doDeleteBook()">Löschen</button>
+    <button type="button" class="btn btn-red" (click)="doLike()">&#9829; Like</button>
 
     <a [routerLink]="['/books', b.isbn]">Details</a>
     

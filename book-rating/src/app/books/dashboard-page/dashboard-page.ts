@@ -35,12 +35,16 @@ export class DashboardPage {
     this.#updateList(ratedBook);
   }
   
+  doLikeBook(book: Book) {
+    this.#store.addLikedBook(book);
+  }
+
   doDeleteBook(book: Book) {
     this.#store.delete(book.isbn).subscribe(() => {
       // Liste neuladen
       this.books.reload();
     });
-    
+
   }
 
   #updateList(ratedBook: Book) {

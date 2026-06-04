@@ -7,6 +7,7 @@
         <app-book-card [book]="b" [min]="1" [max]="5"
             (rateUp)="doRateUp($event)"
             (rateDown)="doRateDown($event)"
-            (delete)="doDeleteBook($event)" />
+            (delete)="doDeleteBook($event)"
+            (like)="doLikeBook($event)" />
     }
 }
